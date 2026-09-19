@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>COD AIMLOCK by TOP H4X</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #050505;
+    color: white;
+}
+
+.container {
+    width: 92%;
+    max-width: 520px;
+    margin: 30px auto;
+}
+
+.header {
+    text-align: center;
+    padding: 25px 10px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 900;
+    color: #ff2020;
+    text-shadow: 0 0 15px #ff0000;
+}
+
+.by {
+    color: #aaa;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.card {
+    background: #101010;
+    border: 1px solid #292929;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(255,0,0,.12);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    background: #181818;
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+button {
+    padding: 15px 8px;
+    border: none;
+    border-radius: 11px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.mp {
+    background: linear-gradient(135deg,#ff1111,#8b0000);
+}
+
+.br {
+    background: linear-gradient(135deg,#ff5a00,#9c2600);
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+#result {
+    display: none;
+    margin-top: 20px;
+}
+
+.resultTitle {
+    color: #ff3030;
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.deviceName {
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+.setting {
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 4px;
+    border-bottom: 1px solid #242424;
+}
+
+.setting span:first-child {
+    color: #ccc;
+}
+
+.value {
+    color: #ff3030;
+    font-weight: bold;
+}
+
+.badge {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: #240606;
+    color: #ff4141;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.footer {
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">🎯 COD AIMLOCK</div>
+        <div class="by">BY TOP H4X</div>
+    </div>
+
+    <div class="card">
+
+        <label>Select Your Device</label>
+
+        <select id="device">
+            <option value="iphone">iPhone</option>
+            <option value="samsung">Samsung</option>
+            <option value="xiaomi">Xiaomi / Redmi</option>
+            <option value="infinix">Infinix</option>
+            <option value="tecno">Tecno</option>
+            <option value="itel">Itel</option>
+            <option value="vivo">Vivo</option>
+            <option value="oppo">Oppo</option>
+            <option value="oneplus">OnePlus</option>
+            <option value="realme">Realme</option>
+            <option value="pixel">Google Pixel</option>
+            <option value="other">Other Android</option>
+        </select>
+
+        <div class="buttons">
+
+            <button class="mp" onclick="generateMP()">
+                🎯 MULTIPLAYER
+            </button>
+
+            <button class="br" onclick="generateBR()">
+                🪂 BATTLE ROYALE
+            </button>
+
+        </div>
+
+        <div id="result"></div>
+
+    </div>
+
+    <div class="footer">
+        TOP H4X • COD MOBILE SENSITIVITY
+    </div>
+
+</div>
+
+<script>
+
+const profiles = {
+
+    iphone: {
+        mp: [95, 105, 110, 115, 120, 125, 130, 135, 85, 100, 105],
+        br: [100, 110, 115, 120, 125, 130, 135, 140, 90, 105, 110]
+    },
+
+    samsung: {
+        mp: [100, 110, 115, 120, 125, 130, 135, 140, 90, 105, 110],
+        br: [105, 115, 120, 125, 130, 135, 140, 145, 95, 110, 115]
+    },
+
+    xiaomi: {
+        mp: [105, 115, 120, 125, 130, 135, 140, 145, 95, 110, 115],
+        br: [110, 120, 125, 130, 135, 140, 145, 150, 100, 115, 120]
+    },
+
+    infinix: {
+        mp: [110, 120, 125, 130, 135, 140, 145, 150, 100, 115, 120],
+        br: [115, 125, 130, 135, 140, 145, 150, 155, 105, 120, 125]
+    },
+
+    tecno: {
+        mp: [110, 120, 125, 130, 135, 140, 145, 150, 100, 115, 120],
+        br: [115, 125, 130, 135, 140, 145, 150, 155, 105, 120, 125]
+    },
+
+    itel: {
+        mp: [115, 125, 130, 135, 140, 145, 150, 155, 105, 120, 125],
+        br: [120, 130, 135, 140, 145, 150, 155, 160, 110, 125, 130]
+    },
+
+    vivo: {
+        mp: [105, 115, 120, 125, 130, 135, 140, 145, 95, 110, 115],
+        br: [110, 120, 125, 130, 135, 140, 145, 150, 100, 115, 120]
+    },
+
+    oppo: {
+        mp: [105, 115, 120, 125, 130, 135, 140, 145, 95, 110, 115],
+        br: [110, 120, 125, 130, 135, 140, 145, 150, 100, 115, 120]
+    },
+
+    oneplus: {
+        mp: [95, 105, 110, 115, 120, 125, 130, 135, 85, 100, 105],
+        br: [100, 110, 115, 120, 125, 130, 135, 140, 90, 105, 110]
+    },
+
+    realme: {
+        mp: [105, 115, 120, 125, 130, 135, 140, 145, 95, 110, 115],
+        br: [110, 120, 125, 130, 135, 140, 145, 150, 100, 115, 120]
+    },
+
+    pixel: {
+        mp: [95, 105, 110, 115, 120, 125, 130, 135, 85, 100, 105],
+        br: [100, 110, 115, 120, 125, 130, 135, 140, 90, 105, 110]
+    },
+
+    other: {
+        mp: [105, 115, 120, 125, 130, 135, 140, 145, 95, 110, 115],
+        br: [110, 120, 125, 130, 135, 140, 145, 150, 100, 115, 120]
+    }
+
+};
+
+
+function generateMP() {
+
+    generate("mp", "🎯 MULTIPLAYER SENSITIVITY");
+
+}
+
+
+function generateBR() {
+
+    generate("br", "🪂 BATTLE ROYALE SENSITIVITY");
+
+}
+
+
+function generate(mode, title) {
+
+    const device = document.getElementById("device").value;
+    const deviceText =
+        document.getElementById("device").options[
+            document.getElementById("device").selectedIndex
+        ].text;
+
+    const values = profiles[device][mode];
+
+    const names = [
+        "Camera Sensitivity",
+        "ADS Sensitivity",
+        "Standard Sensitivity",
+        "Red Dot / Holo",
+        "Tactical Scope",
+        "3x Tactical Scope",
+        "4x Tactical Scope",
+        "Sniper Scope",
+        "6x Tactical Scope",
+        "8x Tactical Scope",
+        "Firing Sensitivity"
+    ];
+
+    let html = "";
+
+    html += `
+        <div class="resultTitle">${title}</div>
+        <div class="deviceName">Device: ${deviceText}</div>
+        <div class="badge">⚡ SHARP TRACKING PRESET</div>
+    `;
+
+    for (let i = 0; i < names.length; i++) {
+
+        html += `
+            <div class="setting">
+                <span>${names[i]}</span>
+                <span class="value">${values[i]}</span>
+            </div>
+        `;
+
+    }
+
+    html += `
+        <div class="setting">
+            <span>Gyroscope</span>
+            <span class="value">ON</span>
+        </div>
+
+        <div class="setting">
+            <span>Gyro Sensitivity</span>
+            <span class="value">${mode === "mp" ? "110" : "120"}</span>
+        </div>
+
+        <div class="setting">
+            <span>Gyro Firing</span>
+            <span class="value">${mode === "mp" ? "115" : "125"}</span>
+        </div>
+    `;
+
+    const result = document.getElementById("result");
+
+    result.innerHTML = html;
+    result.style.display = "block";
+
+    result.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
